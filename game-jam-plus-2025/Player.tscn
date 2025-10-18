@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4c6gu8tt1l3r"]
+
+[ext_resource type="Script" uid="uid://ckdvgf4ebf77q" path="res://player.gd" id="1_kpjcp"]
+[ext_resource type="Texture2D" uid="uid://syku2ohitpgs" path="res://icon.svg" id="2_kne1u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e80uo"]
+size = Vector2(115, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxr5p"]
+size = Vector2(165, 117)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_kpjcp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_kne1u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_e80uo")
+
+[node name="CarryPosition" type="Marker2D" parent="."]
+position = Vector2(0, -65)
+
+[node name="PickupArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+shape = SubResource("RectangleShape2D_cxr5p")
+
+[node name="AimArrow" type="Sprite2D" parent="."]
+position = Vector2(2, -65)
+scale = Vector2(0.08984376, 1)
+texture = ExtResource("2_kne1u")
