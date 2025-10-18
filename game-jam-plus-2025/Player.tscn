@@ -33,6 +33,7 @@ collision_layer = 0
 shape = SubResource("RectangleShape2D_cxr5p")
 
 [node name="AimArrow" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(2, -65)
 scale = Vector2(0.08984376, 1)
 texture = ExtResource("2_kne1u")
