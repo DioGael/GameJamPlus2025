@@ -5,12 +5,10 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_glv2v")]
-modulate = Color(0.39607844, 0.32156864, 1, 1)
 position = Vector2(290, 246)
-collision_mask = 2
+base_color = Color(1, 1, 0, 1)
 
 [node name="CharacterBody2D2" parent="." instance=ExtResource("1_glv2v")]
-modulate = Color(1, 0, 0, 1)
 position = Vector2(928, 233)
-collision_mask = 2
 player_id = 2
+base_color = Color(1, 0.05882353, 0.11764706, 1)

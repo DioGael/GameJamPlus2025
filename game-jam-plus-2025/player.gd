@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var player_id: int = 1  # Set this to 1 or 2 for each player instance
 @export var speed: int = 200
+@export var base_color: Color = Color(1,1,1)
 @onready var carry_position = $CarryPosition
 @onready var pickup_area = $PickupArea
 
@@ -28,6 +29,9 @@ func _ready():
 	# Connect pickup area signals
 	pickup_area.body_entered.connect(_on_pickup_area_body_entered)
 	pickup_area.body_exited.connect(_on_pickup_area_body_exited)
+	
+	#Set base color
+	reset_color()
 
 func _physics_process(delta):
 	# Only process movement if not being carried
@@ -63,6 +67,9 @@ func _input(event):
 			if target_player:
 				pickup_player(target_player)
 
+func reset_color() -> void:
+	modulate = base_color
+
 func pickup_player(target: Node2D):
 	carried_player = target
 	target.get_picked_up(self)  # Tell the other player they're being carried
@@ -86,22 +93,27 @@ func drop_player():
 	carried_player.get_dropped()
 	
 	# Reset visual feedback
-	modulate = Color(1, 1, 1)
-	carried_player.modulate = Color(1, 1, 1)
+	reset_color()
+	carried_player.reset_color()
 	
 	carried_player = null
+
 func throw_player(throw_strength: float):
-	if carried_player:
+	if carried_player != null:
 		var throw_direction = Vector2(1, 0)  # Default right
 		if velocity.length() > 0:
 			throw_direction = velocity.normalized()
 		
-		drop_player()
 		carried_player.velocity = throw_direction * throw_strength
+		drop_player()
+		reset_color()
+
 func get_dropped():
 	carrier_player = null
 	# Re-enable collision
 	$CollisionShape2D.disabled = false
+	
+	reset_color()
 
 func _on_pickup_area_body_entered(body):
 	if body is CharacterBody2D and body.has_method("get_picked_up") and body != self:
@@ -111,7 +123,7 @@ func _on_pickup_area_body_entered(body):
 			
 			# Visual feedback - highlight when pickup is available
 			if carrier_player == null and carried_player == null:
-				modulate = Color(0.9, 0.9, 1.2)  # Slight blue tint
+				modulate = base_color * 1.5  # Slight blue tint
 
 func _on_pickup_area_body_exited(body):
 	if body in nearby_players:
@@ -121,4 +133,4 @@ func _on_pickup_area_body_exited(body):
 		
 		# Reset visual feedback
 		if carrier_player == null and carried_player == null:
-			modulate = Color(1, 1, 1)
+			reset_color()
