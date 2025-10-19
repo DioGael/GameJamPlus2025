@@ -9,7 +9,7 @@
 position = Vector2(283, 349)
 
 [node name="CharacterBody2D2" parent="." instance=ExtResource("1_glv2v")]
-position = Vector2(657, 310)
+position = Vector2(744, 364)
 player_id = 2
 
 [node name="Wall" parent="." instance=ExtResource("2_uu6xs")]

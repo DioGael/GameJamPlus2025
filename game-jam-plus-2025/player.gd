@@ -3,10 +3,10 @@ extends CharacterBody2D
 # Player states
 enum State { NORMAL, CARRIED, THROWING, BOUNCING }
 @export var player_id: int = 1
-@export var speed: int = 300
-@export var jump_speed: int = 500
+@export var speed: int = 200
 @export var throw_strength: float = 500.0
 @export var bounce_speed: float = 400.0
+@export var gravity: float = 980.0
 
 @onready var carry_position = $CarryPosition
 @onready var pickup_area = $PickupArea
@@ -56,42 +56,49 @@ func _physics_process(delta):
 			handle_throwing_state(delta)
 		State.BOUNCING:
 			handle_bouncing_state(delta)
-			
+	
+	# Only call move_and_slide if we're not being carried
+	if current_state != State.CARRIED:
+		move_and_slide()
+	
+	# Update input tracking
 	update_input_tracking()
 
+func update_input_tracking():
+	# Track if down direction is pressed
+	down_pressed = Input.is_action_pressed(move_down)
+
 func handle_normal_movement(delta):
-	# Only process movement if not being carried
-	if carrier_player != null:
-		return
+	# Apply gravity
+	if not is_on_floor():
+		velocity.y += gravity * delta
+	elif velocity.y > 0:
+		velocity.y = 0
 		
+	# Get the input direction and handle the movement/deceleration.
 	var direction = Vector2.ZERO
 	direction.x = Input.get_axis(move_left, move_right)
 	
 	# Only use vertical input for movement if not trying to drop
-	if not (carried_player and Input.is_action_pressed(interact) and not down_pressed):
-		if is_on_floor() and Input.is_action_pressed(move_up):
-			# print("ON FLOOR: ", self.name, "\tVelocity Y", velocity.y)
-			velocity.y -= jump_speed
+	if not (carried_player and Input.is_action_pressed(interact) and down_pressed):
+		direction.y = Input.get_axis(move_up, move_down)
 		
-	velocity.x = direction.x * speed
-	
-	# Apply gravity
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-		velocity.y = min(velocity.y, 600.0)
-	elif velocity.y > 0:
-		velocity.y = 0
-		
-	move_and_slide()
+	if direction:
+		velocity.x = direction.x * speed
+		# Only apply vertical movement if we're not carrying someone or not trying to drop
+		if not carried_player or not (Input.is_action_pressed(interact) and down_pressed):
+			velocity.y = direction.y * speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, speed)
 
 func handle_carried_state():
-	if carrier_player != null:
-		global_position = carrier_player.carry_position.global_position
-		velocity = Vector2.ZERO
+	# When carried, we don't control our own movement
+	# Our position is set by the carrier in their physics process
+	velocity = Vector2.ZERO
 
 func handle_throwing_state(delta):
 	# Apply gravity and movement for parabolic throw
-	velocity.y += get_gravity().y * delta
+	velocity.y += gravity * delta
 	var collision = move_and_collide(velocity * delta)
 	
 	if collision:
@@ -99,7 +106,6 @@ func handle_throwing_state(delta):
 		current_state = State.NORMAL
 		velocity = Vector2.ZERO
 		modulate = Color(1, 1, 1)  # Reset color
-	pass
 
 func handle_bouncing_state(delta):
 	# Bounce around like a beam of light
@@ -131,12 +137,7 @@ func _input(event):
 			var target_player = get_best_pickup_target()
 			if target_player:
 				pickup_player(target_player)
-				interact_pressed = true
-				
-		if event.is_action_released(interact):
-			interact_pressed = false
-		if interact_pressed:
-			return
+		
 		# Handle throw/drop when carrying someone
 		if carried_player and event.is_action_pressed(interact):
 			# Check if down is also pressed for drop
@@ -144,10 +145,10 @@ func _input(event):
 				drop_player()
 			else:
 				throw_player()
-
-func update_input_tracking():
-	down_pressed = Input.is_action_pressed(move_down)
-	# interact_pressed = Input.is_action_just_pressed(interact)
+		
+		# Cycle throw mode with interact + up
+		if event.is_action_pressed(interact) and Input.is_action_pressed(move_up) and not carried_player:
+			cycle_throw_mode()
 
 func get_best_pickup_target():
 	for player in nearby_players:
@@ -174,6 +175,9 @@ func get_picked_up(by: Node2D):
 	current_state = State.CARRIED
 	$CollisionShape2D.disabled = true
 	velocity = Vector2.ZERO
+	
+	# Important: Set our position to the carrier's carry position immediately
+	global_position = carrier_player.carry_position.global_position
 
 func drop_player():
 	if not carried_player:
@@ -195,12 +199,14 @@ func throw_player():
 	if not carried_player:
 		return
 	
-	var throw_direction = Vector2(1, 1).normalized()
+	var throw_direction = Vector2.ZERO
 	
 	# Determine throw direction based on last movement or facing
-	
+	if velocity.length() > 0:
+		throw_direction = velocity.normalized()
+	else:
 		# Default to right if no movement
-	throw_direction += velocity.normalized()
+		throw_direction = Vector2(1, -0.3)  # Slightly upward
 	
 	if throw_mode == 0:  # Parabolic throw
 		parabolic_throw(carried_player, throw_direction)
@@ -269,7 +275,13 @@ func show_throw_indicator():
 		# Show bouncing indicator
 		print("Bouncing throw mode - Press INTERACT to throw, INTERACT+DOWN to drop")
 
-# Function to cycle throw modes (call this from somewhere, like a separate button)
+# Function to cycle throw modes
 func cycle_throw_mode():
 	throw_mode = (throw_mode + 1) % 2
 	show_throw_indicator()
+
+# Add this function to update carried player position
+func _process(delta):
+	# If we're carrying someone, update their position
+	if carried_player:
+		carried_player.global_position = carry_position.global_position
