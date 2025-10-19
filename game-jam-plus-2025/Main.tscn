@@ -1,39 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccy8m88xkphlx"]
+[gd_scene load_steps=3 format=3 uid="uid://ccy8m88xkphlx"]
 
-[ext_resource type="Script" uid="uid://ckdvgf4ebf77q" path="res://player.gd" id="1_uu6xs"]
-[ext_resource type="Texture2D" uid="uid://syku2ohitpgs" path="res://icon.svg" id="2_r0du0"]
+[ext_resource type="PackedScene" uid="uid://b4c6gu8tt1l3r" path="res://Player.tscn" id="1_glv2v"]
+[ext_resource type="PackedScene" uid="uid://c44k11duqnghv" path="res://Wall.tscn" id="2_uu6xs"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e80uo"]
-size = Vector2(115, 112)
+[node name="Main" type="Node2D"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxr5p"]
-size = Vector2(165, 117)
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_glv2v")]
+position = Vector2(283, 349)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
-collision_mask = 2
-script = ExtResource("1_uu6xs")
+[node name="CharacterBody2D2" parent="." instance=ExtResource("1_glv2v")]
+position = Vector2(657, 310)
+player_id = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_r0du0")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 0)
-shape = SubResource("RectangleShape2D_e80uo")
-
-[node name="CarryPosition" type="Marker2D" parent="."]
-position = Vector2(0, -65)
-
-[node name="PickupArea" type="Area2D" parent="."]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
-shape = SubResource("RectangleShape2D_cxr5p")
-
-[node name="AimArrow" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(2, -65)
-scale = Vector2(0.08984376, 1)
-texture = ExtResource("2_r0du0")
+[node name="Wall" parent="." instance=ExtResource("2_uu6xs")]
