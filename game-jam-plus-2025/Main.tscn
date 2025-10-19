@@ -13,3 +13,4 @@ position = Vector2(657, 310)
 player_id = 2
 
 [node name="Wall" parent="." instance=ExtResource("2_uu6xs")]
+position = Vector2(556, 656)
