@@ -1,0 +1,84 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://dntot8t8lm6f0"]
+
+[ext_resource type="Texture2D" uid="uid://c3a6lasbpuhal" path="res://Assets/Sprites_GameJamPlus2025/Personaje1_SpriteSheet/Personaje1_Piernas.png" id="1_a844v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atlu0"]
+atlas = ExtResource("1_a844v")
+region = Rect2(0, 396, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1nle"]
+atlas = ExtResource("1_a844v")
+region = Rect2(0, 66, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fu6w3"]
+atlas = ExtResource("1_a844v")
+region = Rect2(0, 132, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nquo"]
+atlas = ExtResource("1_a844v")
+region = Rect2(56, 132, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mj245"]
+atlas = ExtResource("1_a844v")
+region = Rect2(112, 132, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45nsv"]
+atlas = ExtResource("1_a844v")
+region = Rect2(168, 132, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_de381"]
+atlas = ExtResource("1_a844v")
+region = Rect2(224, 132, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ovjyw"]
+atlas = ExtResource("1_a844v")
+region = Rect2(280, 132, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfhx7"]
+atlas = ExtResource("1_a844v")
+region = Rect2(336, 132, 56, 66)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atlu0")
+}],
+"loop": true,
+"name": &"falling",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1nle")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fu6w3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nquo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mj245")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45nsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_de381")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ovjyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfhx7")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 24.0
+}]

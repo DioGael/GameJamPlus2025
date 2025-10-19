@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4c6gu8tt1l3r"]
+[gd_scene load_steps=7 format=3 uid="uid://b4c6gu8tt1l3r"]
 
 [ext_resource type="Script" uid="uid://ckdvgf4ebf77q" path="res://player.gd" id="1_kpjcp"]
 [ext_resource type="Texture2D" uid="uid://syku2ohitpgs" path="res://icon.svg" id="2_kne1u"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kpjcp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kne1u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e80uo"]
 size = Vector2(115, 112)
@@ -14,12 +18,18 @@ collision_mask = 2
 script = ExtResource("1_kpjcp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_kne1u")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
+[node name="LegsAnimations" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_kpjcp")
+
+[node name="BodyAnimations" type="AnimatedSprite2D" parent="."]
+z_index = 2
+sprite_frames = SubResource("SpriteFrames_kne1u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_e80uo")
 
@@ -27,6 +37,7 @@ shape = SubResource("RectangleShape2D_e80uo")
 position = Vector2(0, -65)
 
 [node name="PickupArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
