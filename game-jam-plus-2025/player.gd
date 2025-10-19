@@ -21,7 +21,7 @@ var nearby_players: Array[Node2D] = []
 # Throw variables
 var throw_velocity: Vector2 = Vector2.ZERO
 var bounce_direction: Vector2 = Vector2.RIGHT
-var throw_mode: int = 0  # 0 = Parabolic, 1 = Bouncing
+@export var throw_mode: int = 0  # 0 = Parabolic, 1 = Bouncing
 
 # Input action names
 var move_left: String
@@ -147,6 +147,9 @@ func _input(event):
 				drop_player()
 			else:
 				throw_player()
+				
+	if current_state == State.BOUNCING and event.is_action_pressed(move_down):
+		current_state = State.NORMAL
 
 func update_input_tracking():
 	down_pressed = Input.is_action_pressed(move_down)
@@ -207,7 +210,7 @@ func throw_player():
 		throw_direction = velocity.normalized()
 	else:
 		# Default to right if no movement
-		throw_direction = Vector2(1, -0.3)  # Slightly upward
+		throw_direction = Vector2(1, -1)  # Slightly upward
 		
 	
 	if throw_mode == 0:  # Parabolic throw
@@ -283,8 +286,6 @@ func cycle_throw_mode():
 	show_throw_indicator()
 	
 # Add this function to update carried player position
-
-
 
 func _process(delta):
 	# If we're carrying someone, update their position

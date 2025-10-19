@@ -11,6 +11,14 @@ position = Vector2(283, 349)
 [node name="CharacterBody2D2" parent="." instance=ExtResource("1_glv2v")]
 position = Vector2(744, 364)
 player_id = 2
+throw_mode = 1
 
 [node name="Wall" parent="." instance=ExtResource("2_uu6xs")]
 position = Vector2(556, 656)
+
+[node name="Wall2" parent="." instance=ExtResource("2_uu6xs")]
+position = Vector2(555, -16)
+
+[node name="Wall3" parent="." instance=ExtResource("2_uu6xs")]
+position = Vector2(1131, 347)
+rotation = 1.5707964
