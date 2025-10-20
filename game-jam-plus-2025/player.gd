@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # Player states
-enum State { NORMAL, CARRIED, THROWING, BOUNCING }
+enum State { NORMAL, CARRIED, THROWING, BOUNCING, DEAD }
 @export var player_id: int = 1
 @export var speed: int = 300
 @export var jump_speed: int = 500
@@ -17,6 +17,8 @@ var carried_player: Node2D = null
 var carrier_player: Node2D = null
 var can_pickup: bool = false
 var nearby_players: Array[Node2D] = []
+
+var respawn_point: Vector2 = Vector2(20, 20)
 
 # Throw variables
 var throw_velocity: Vector2 = Vector2.ZERO
@@ -157,7 +159,7 @@ func update_input_tracking():
 
 func get_best_pickup_target():
 	for player in nearby_players:
-		if player.current_state != State.CARRIED and player != self:
+		if player.current_state != State.CARRIED and player.current_state != State.DEAD and player != self:
 			return player
 	return null
 
@@ -197,7 +199,10 @@ func drop_player():
 func get_dropped():
 	carrier_player = null
 	current_state = State.NORMAL
-	$CollisionShape2D.disabled = false
+	set_collision.call_deferred(false)
+	
+func set_collision(value: bool):
+	$CollisionShape2D.disabled = value
 
 func throw_player():
 	if not carried_player:
@@ -285,8 +290,26 @@ func cycle_throw_mode():
 	throw_mode = (throw_mode + 1) % 2
 	show_throw_indicator()
 	
-# Add this function to update carried player position
+func die() -> void:
+	if carrier_player != null:
+		carrier_player.drop_player()
+	else:
+		drop_player()
+	
+	set_collision_layer_value(1, false)
+	current_state = State.DEAD
+	
+	for i in 8:
+		self.modulate.a = 0.5 if Engine.get_frames_drawn() % 2 == 0 else 1.0
+	
+	respawn.call_deferred()
+	
+func respawn() -> void:
+	position = respawn_point
+	set_collision_layer_value(1, true)
+	current_state = State.NORMAL
 
+# Add this function to update carried player position
 func _process(delta):
 	# If we're carrying someone, update their position
 	if carried_player:
