@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4c6gu8tt1l3r"]
+[gd_scene load_steps=8 format=3 uid="uid://b4c6gu8tt1l3r"]
 
 [ext_resource type="Script" uid="uid://ckdvgf4ebf77q" path="res://player.gd" id="1_kpjcp"]
 [ext_resource type="Texture2D" uid="uid://syku2ohitpgs" path="res://icon.svg" id="2_kne1u"]
+[ext_resource type="Script" uid="uid://dqctrsjuegl1g" path="res://visible_notifier_2d.gd" id="3_kne1u"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kpjcp"]
 
@@ -52,3 +53,6 @@ visible = false
 position = Vector2(2, -65)
 scale = Vector2(0.08984376, 1)
 texture = ExtResource("2_kne1u")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+script = ExtResource("3_kne1u")
