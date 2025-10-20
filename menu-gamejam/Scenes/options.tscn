@@ -1,0 +1,93 @@
+[gd_scene load_steps=11 format=3 uid="uid://wgtn1qhuog6t"]
+
+[ext_resource type="Script" uid="uid://c71n6rtxylyaj" path="res://Script/options.gd" id="1_4tmxy"]
+[ext_resource type="AudioStream" uid="uid://cbqp4ri0vjsgy" path="res://AUDIO MENU.wav" id="2_4tmxy"]
+[ext_resource type="Texture2D" uid="uid://cqyywcrg0ruls" path="res://ConceptPersonaje1y2.png" id="2_38txh"]
+[ext_resource type="Texture2D" uid="uid://dxgoio1ctn12y" path="res://Menu/Confirm_Green_Icon_02.png" id="2_ww8vx"]
+[ext_resource type="Texture2D" uid="uid://hddl1ac7doih" path="res://Menu/Exit_Red_Icon_01.png" id="3_kftxf"]
+[ext_resource type="Texture2D" uid="uid://begbfsvo3h4uk" path="res://Menu/back.png" id="4_hvj8k"]
+[ext_resource type="Texture2D" uid="uid://cbi26ni3gd6r4" path="res://Menu/image (3).png" id="6_hvj8k"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g5vgl"]
+texture = ExtResource("4_hvj8k")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_srb65"]
+texture = ExtResource("4_hvj8k")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_38txh"]
+texture = ExtResource("6_hvj8k")
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 8.999939
+offset_top = -2.0
+offset_right = 8.999939
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.0008261, 1.0014222)
+pivot_offset = Vector2(626.0248, 352.97592)
+size_flags_stretch_ratio = 9.45
+script = ExtResource("1_4tmxy")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -648.94666
+offset_top = -351.9974
+offset_right = 631.995
+offset_bottom = 363.98434
+texture = ExtResource("2_38txh")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.86
+anchor_top = 0.82
+anchor_right = 0.86
+anchor_bottom = 25.69
+offset_left = -234.28925
+offset_top = -29.456116
+offset_right = 199.35254
+offset_bottom = 293.08505
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 20
+
+[node name="Vol_Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Volume"
+
+[node name="Volume" type="HSlider" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Mute" type="CheckBox" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_icons/checked = ExtResource("2_ww8vx")
+theme_override_icons/radio_checked = ExtResource("3_kftxf")
+text = "Mute"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_g5vgl")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_srb65")
+theme_override_styles/hover = SubResource("StyleBoxTexture_38txh")
+text = "
+"
+
+[node name="AudioMenu" type="AudioStreamPlayer" parent="MarginContainer"]
+stream = ExtResource("2_4tmxy")
+
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/Volume" to="." method="_on_volume_value_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/Mute" to="." method="_on_mute_toggled"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
