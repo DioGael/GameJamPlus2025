@@ -14,3 +14,4 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+game-jam-plus-2025/addons/godot-git-plugin/win64/~libgit_plugin.windows.editor.x86_64.dll
