@@ -10,7 +10,12 @@ var has_throwed = false
 @export var throw_strength: float = 500.0
 @export var bounce_speed: float = 400.0
 
+@onready var collider : CollisionShape2D = $CollisionShape2D
+
+
 @onready var carry_position = $CarryPosition
+@onready var carry_position2 = $CarriPosition2
+@onready var carry_position3 = $CarriPosition3
 @onready var pickup_area = $PickupArea
 @onready var sprite = $Sprite2D
 
@@ -66,6 +71,18 @@ func load_sprites() -> void:
 	
 	pass
 
+func set_collision_shape():
+	var	shape : CapsuleShape2D = collider.shape.duplicate()
+	if player_id == 1:
+		shape.radius = 21.65
+		shape.height = 96.65
+		collider.position.x = 0.105
+		pass
+	elif player_id == 2:
+		shape.radius = 21.65
+		shape.height = 65.31
+	collider.shape = shape
+
 
 func _ready():
 	# Set up input actions based on player_id
@@ -77,6 +94,7 @@ func _ready():
 	load_sprites()
 	body_sprite.play("idle")
 	legs_sprite.play("idle")
+	set_collision_shape()
 	# Connect pickup area signals
 	pickup_area.body_entered.connect(_on_pickup_area_body_entered)
 	pickup_area.body_exited.connect(_on_pickup_area_body_exited)
@@ -419,10 +437,13 @@ func respawn() -> void:
 
 # Add this function to update carried player position
 func _process(delta):
-	if player_id == 2:
-		print(has_throwed)
-		print(body_sprite.animation)
 	# If we're carrying someone, update their position
 	if carried_player:
 		#sprint("player_id that is being carried: " + str(player_id))
-		carried_player.global_position = carry_position.global_position
+		if player_id == 2:
+			carried_player.global_position = carry_position.global_position
+		else:
+			if last_dir.x > 0:
+				carried_player.global_position = carry_position2.global_position
+			elif last_dir.x < 0:
+				carried_player.global_position = carry_position3.global_position
