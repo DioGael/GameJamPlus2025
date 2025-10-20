@@ -23,10 +23,11 @@ visible = false
 texture = ExtResource("2_kne1u")
 
 [node name="LegsAnimations" type="AnimatedSprite2D" parent="."]
+z_index = 10
 sprite_frames = SubResource("SpriteFrames_kpjcp")
 
 [node name="BodyAnimations" type="AnimatedSprite2D" parent="."]
-z_index = 2
+z_index = 11
 sprite_frames = SubResource("SpriteFrames_kne1u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

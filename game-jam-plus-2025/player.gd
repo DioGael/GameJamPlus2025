@@ -9,10 +9,11 @@ var has_throwed = false
 @export var jump_speed: int = 500
 @export var throw_strength: float = 500.0
 @export var bounce_speed: float = 600.0
+@export var other_player: Node2D
+
 
 @onready var bounce_speed_var: float = bounce_speed
 @onready var collider : CollisionShape2D = $CollisionShape2D
-
 
 @onready var carry_position = $CarryPosition
 @onready var carry_position2 = $CarriPosition2
@@ -54,6 +55,11 @@ const red_legs_sprites : String = "res://Assets/Sprites_GameJamPlus2025/Personaj
 const yellow_body_sprites : String = "res://Assets/Sprites_GameJamPlus2025/Personaje2_SpriteSheet/YellowAnimations_body.tres"
 const yellow_legs_sprites : String = "res://Assets/Sprites_GameJamPlus2025/Personaje2_SpriteSheet/YellowAnimations_legs.tres"
 
+func set_respawn(position: Vector2) -> void:
+	if respawn_point == position:
+		return
+	respawn_point = position
+	other_player.set_respawn(position)
 
 #LoadSprites according to player id
 func load_sprites() -> void:
@@ -78,10 +84,11 @@ func set_collision_shape():
 		shape.radius = 21.65
 		shape.height = 96.65
 		collider.position.x = 0.105
+		jump_speed = 500 * 1.25
 		pass
 	elif player_id == 2:
 		shape.radius = 21.65
-		shape.height = 65.31
+		shape.height = 63
 	collider.shape = shape
 
 
@@ -102,6 +109,11 @@ func _ready():
 
 func _physics_process(delta):
 	check_thrwing_is_playing()
+	if player_id == 1:
+		if carried_player != null:
+			jump_speed = 500
+		else:
+			jump_speed = 500 * 1.25
 	match current_state:
 		State.NORMAL:
 			handle_normal_movement(delta)

@@ -2,9 +2,9 @@ extends Camera2D
 
 @export var character1: Node2D
 @export var character2: Node2D
-@export var smoothing_speed: float = 5.0
-@export var min_zoom: float = 1
-@export var max_zoom: float = 1.5
+@export var smoothing_speed: float = 15.0
+@export var min_zoom: float = 1.2
+@export var max_zoom: float = 2
 @export var zoom_sensitivity: float = 500.0  # Higher = less zoom change
 
 func _process(delta):
