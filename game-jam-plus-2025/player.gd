@@ -240,7 +240,7 @@ func handle_bouncing_state(delta):
 		# Optional: Add some energy loss
 		bounce_speed *= 0.95
 		
-		if bounce_speed < 50:  # Stop when speed gets too low
+		if bounce_speed < 100.0:  # Stop when speed gets too low
 			current_state = State.NORMAL
 			legs_sprite.visible = true #Show legs
 			bounce_speed = 400.0  # Reset for next time
@@ -306,6 +306,7 @@ func pickup_player(target: Node2D):
 func get_picked_up(by: Node2D):
 	carrier_player = by
 	current_state = State.CARRIED
+	bounce_speed = 400.0
 	$CollisionShape2D.disabled = true
 	velocity = Vector2.ZERO	
 	# Important: Set our position to the carrier's carry position immediately
