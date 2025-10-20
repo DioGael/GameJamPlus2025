@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://ckdvgf4ebf77q" path="res://player.gd" id="1_kpjcp"]
 [ext_resource type="Texture2D" uid="uid://syku2ohitpgs" path="res://icon.svg" id="2_kne1u"]
-[ext_resource type="Script" uid="uid://dqctrsjuegl1g" path="res://visible_notifier_2d.gd" id="3_kne1u"]
-[ext_resource type="Script" uid="uid://c2nipa6lpfye2" path="res://dead_area.gd" id="4_e80uo"]
+[ext_resource type="Script" path="res://visible_notifier_2d.gd" id="3_kne1u"]
+[ext_resource type="Script" path="res://dead_area.gd" id="4_e80uo"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kpjcp"]
 

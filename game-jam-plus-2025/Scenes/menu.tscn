@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bjdkp06ryjn7n" path="res://Menu/image (1).png" id="8_g8i7c"]
 [ext_resource type="Texture2D" uid="uid://bl3lc4ny5funa" path="res://Menu/ExitClick.png" id="8_rfqti"]
 [ext_resource type="Texture2D" uid="uid://cb3rw3yvwsivp" path="res://Menu/image (2).png" id="11_23t3j"]
-[ext_resource type="AudioStream" uid="uid://cbqp4ri0vjsgy" path="res://AUDIO MENU.wav" id="12_g8i7c"]
+[ext_resource type="AudioStream" uid="uid://di3mwtxgbtsg4" path="res://Assets/menu.wav" id="12_g8i7c"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7qvly"]
 texture = ExtResource("3_wbdvm")
@@ -118,6 +118,7 @@ text = "
 
 [node name="AudioMenu" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_g8i7c")
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]

@@ -461,3 +461,7 @@ func _process(delta):
 				carried_player.global_position = carry_position2.global_position
 			elif last_dir.x < 0:
 				carried_player.global_position = carry_position3.global_position
+
+
+func _on_win_flag_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

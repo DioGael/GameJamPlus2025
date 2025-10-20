@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b4c6gu8tt1l3r" path="res://Player.tscn" id="1_glv2v"]
 [ext_resource type="PackedScene" uid="uid://c44k11duqnghv" path="res://Wall.tscn" id="2_uu6xs"]
-[ext_resource type="Script" uid="uid://bq4uxd1h8elcl" path="res://enemy.gd" id="3_r0du0"]
+[ext_resource type="Script" path="res://enemy.gd" id="3_r0du0"]
 [ext_resource type="Texture2D" uid="uid://syku2ohitpgs" path="res://icon.svg" id="4_cm0pq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cm0pq"]
@@ -30,7 +30,6 @@ rotation = 1.5707964
 [node name="Enemy" type="Area2D" parent="."]
 position = Vector2(989, 609)
 script = ExtResource("3_r0du0")
-metadata/_custom_type_script = "uid://bq4uxd1h8elcl"
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemy"]
 modulate = Color(1, 0, 0, 1)

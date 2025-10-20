@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=4 uid="uid://dhs7ds3nvdnyv"]
+[gd_scene load_steps=12 format=4 uid="uid://dhs7ds3nvdnyv"]
 
-[ext_resource type="Texture2D" uid="uid://cn1bbam8da45f" path="res://assets/tileset/Background_2.png" id="1_3dryh"]
-[ext_resource type="Texture2D" uid="uid://cxmkglg8r1g00" path="res://assets/tileset/Assets.png" id="1_05txy"]
+[ext_resource type="Texture2D" uid="uid://cn1bbam8da45f" path="res://Assets/tileset/Background_2.png" id="1_3dryh"]
+[ext_resource type="Texture2D" uid="uid://cxmkglg8r1g00" path="res://Assets/tileset/Assets.png" id="1_05txy"]
 [ext_resource type="PackedScene" uid="uid://b4c6gu8tt1l3r" path="res://Player.tscn" id="2_lbpsp"]
 [ext_resource type="Script" uid="uid://do4kwoj7nbirp" path="res://camera.gd" id="3_5of7i"]
-[ext_resource type="PackedScene" uid="uid://b8g4w2mvhj6a6" path="res://respawn_area.tscn" id="5_wowpa"]
+[ext_resource type="PackedScene" path="res://respawn_area.tscn" id="5_wowpa"]
+[ext_resource type="AudioStream" uid="uid://c2jc7fknctuxn" path="res://Assets/level.wav" id="6_i6g32"]
+[ext_resource type="Script" uid="uid://cfg8es35xv6mb" path="res://Scenes/win_flag.gd" id="7_v158k"]
+[ext_resource type="Texture2D" uid="uid://dtlv7wojrvs3f" path="res://Assets/Sprites_GameJamPlus2025/Sprite-0001.png" id="8_h4fw4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbpsp"]
 texture = ExtResource("1_05txy")
@@ -709,6 +712,9 @@ terrain_set_0/terrain_2/name = "Spike"
 terrain_set_0/terrain_2/color = Color(1, 0, 0, 1)
 sources/0 = SubResource("TileSetAtlasSource_lbpsp")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ldgsr"]
+size = Vector2(46, 40)
+
 [node name="Game" type="Node2D"]
 
 [node name="TileMap" type="Node2D" parent="."]
@@ -748,6 +754,11 @@ throw_mode = 1
 script = ExtResource("3_5of7i")
 character1 = NodePath("../Player1")
 character2 = NodePath("../Player2")
+max_zoom = 1.8
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="Camera2D"]
+stream = ExtResource("6_i6g32")
+autoplay = true
 
 [node name="Respawns" type="Node2D" parent="."]
 position = Vector2(2449, 40)
@@ -765,3 +776,16 @@ position = Vector2(1099, 39)
 
 [node name="Area2D5" parent="Respawns" instance=ExtResource("5_wowpa")]
 position = Vector2(3841, 140)
+
+[node name="WinFlag" type="Area2D" parent="."]
+position = Vector2(10436, 453)
+collision_layer = 0
+script = ExtResource("7_v158k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinFlag"]
+shape = SubResource("RectangleShape2D_ldgsr")
+
+[node name="Sprite2D" type="Sprite2D" parent="WinFlag"]
+texture = ExtResource("8_h4fw4")
+
+[connection signal="body_entered" from="WinFlag" to="WinFlag" method="_on_body_entered"]
