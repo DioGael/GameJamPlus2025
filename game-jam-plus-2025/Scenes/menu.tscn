@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://dy3awfy6r1212"]
 
 [ext_resource type="Script" uid="uid://cs8pu04scw37o" path="res://Script/menu.gd" id="1_wwsa2"]
-[ext_resource type="Texture2D" uid="uid://cqyywcrg0ruls" path="res://ConceptPersonaje1y2.png" id="2_jsrd8"]
+[ext_resource type="Texture2D" uid="uid://dng76pq6cbvj2" path="res://Assets/Banner.png" id="2_g8i7c"]
 [ext_resource type="Texture2D" uid="uid://duvjvcwc0f1dn" path="res://Menu/PlayBtn.png" id="3_wbdvm"]
 [ext_resource type="Texture2D" uid="uid://cujbt2g6fwxtq" path="res://Menu/PlayClick.png" id="4_6swd7"]
 [ext_resource type="Texture2D" uid="uid://d3prdlgcut8ue" path="res://Menu/OptClick.png" id="4_q3rjx"]
@@ -56,13 +56,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1.0
-offset_top = -2.0
-offset_right = 2.0
-offset_bottom = 1.0
+offset_left = -117.0
+offset_top = -123.0
+offset_right = 169.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_jsrd8")
+texture = ExtResource("2_g8i7c")
 expand_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
