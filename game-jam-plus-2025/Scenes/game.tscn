@@ -698,7 +698,7 @@ terrain_set_0/terrain_1/name = "Cave"
 terrain_set_0/terrain_1/color = Color(0.61346304, 0.20948857, 0.8007369, 1)
 sources/0 = SubResource("TileSetAtlasSource_lbpsp")
 
-[node name="Node2D" type="Node2D"]
+[node name="Game" type="Node2D"]
 
 [node name="TileMap" type="Node2D" parent="."]
 
