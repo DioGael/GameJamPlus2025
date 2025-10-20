@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b074g15em6x41"
-path="res://.godot/imported/Personaje2_Legs.png-fabce053cca2d3bf6d9246a787fa8a6c.ctex"
+uid="uid://cn1bbam8da45f"
+path="res://.godot/imported/Background_2.png-bf05e3951b5c59b9aba685984b8ba957.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Sprites_GameJamPlus2025/Personaje2_SpriteSheet/Personaje2_Legs.png"
-dest_files=["res://.godot/imported/Personaje2_Legs.png-fabce053cca2d3bf6d9246a787fa8a6c.ctex"]
+source_file="res://assets/tileset/Background_2.png"
+dest_files=["res://.godot/imported/Background_2.png-bf05e3951b5c59b9aba685984b8ba957.ctex"]
 
 [params]
 
