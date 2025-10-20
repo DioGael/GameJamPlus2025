@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://2uip7mefyd6l"
-path="res://.godot/imported/Personaje2_UPper_Body.png-fada53ca36a2db19fa67544a60da1dd0.ctex"
+path="res://.godot/imported/Personaje2_UPper_Body.png-c3446e49f23cab6502cd9d563db98440.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites_GameJamPlus2025/Personaje2_SpriteSheet/Personaje2_UPper_Body.png"
-dest_files=["res://.godot/imported/Personaje2_UPper_Body.png-fada53ca36a2db19fa67544a60da1dd0.ctex"]
+source_file="res://assets/Sprites_GameJamPlus2025/Personaje2_SpriteSheet/Personaje2_UPper_Body.png"
+dest_files=["res://.godot/imported/Personaje2_UPper_Body.png-c3446e49f23cab6502cd9d563db98440.ctex"]
 
 [params]
 

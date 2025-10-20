@@ -8,8 +8,9 @@ var has_throwed = false
 @export var speed: int = 300
 @export var jump_speed: int = 500
 @export var throw_strength: float = 500.0
-@export var bounce_speed: float = 400.0
+@export var bounce_speed: float = 600.0
 
+@onready var bounce_speed_var: float = bounce_speed
 @onready var collider : CollisionShape2D = $CollisionShape2D
 
 
@@ -231,19 +232,19 @@ func handle_throwing_state(delta):
 
 func handle_bouncing_state(delta):
 	# Bounce around like a beam of light
-	var collision = move_and_collide(bounce_direction * bounce_speed * delta)
+	var collision = move_and_collide(bounce_direction * bounce_speed_var * delta)
 	
 	if collision:
 		# Bounce off surfaces
 		bounce_direction = bounce_direction.bounce(collision.get_normal())
 		
 		# Optional: Add some energy loss
-		bounce_speed *= 0.95
+		bounce_speed_var *= 0.95
 		
-		if bounce_speed < 100.0:  # Stop when speed gets too low
+		if bounce_speed_var < 200.0:  # Stop when speed gets too low
 			current_state = State.NORMAL
 			legs_sprite.visible = true #Show legs
-			bounce_speed = 400.0  # Reset for next time
+			bounce_speed_var = bounce_speed  # Reset for next time
 			modulate = Color(1, 1, 1)  # Reset color
 
 func _input(event):
@@ -306,7 +307,7 @@ func pickup_player(target: Node2D):
 func get_picked_up(by: Node2D):
 	carrier_player = by
 	current_state = State.CARRIED
-	bounce_speed = 400.0
+	bounce_speed_var = bounce_speed
 	$CollisionShape2D.disabled = true
 	velocity = Vector2.ZERO	
 	# Important: Set our position to the carrier's carry position immediately

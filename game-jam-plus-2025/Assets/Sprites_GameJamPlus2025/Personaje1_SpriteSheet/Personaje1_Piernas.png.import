@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c3a6lasbpuhal"
-path="res://.godot/imported/Personaje1_Piernas.png-fd747ee3f5396408ab958070658a7671.ctex"
+path="res://.godot/imported/Personaje1_Piernas.png-3a6c0198b84b4923cc8de732db4d6d98.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites_GameJamPlus2025/Personaje1_SpriteSheet/Personaje1_Piernas.png"
-dest_files=["res://.godot/imported/Personaje1_Piernas.png-fd747ee3f5396408ab958070658a7671.ctex"]
+source_file="res://assets/Sprites_GameJamPlus2025/Personaje1_SpriteSheet/Personaje1_Piernas.png"
+dest_files=["res://.godot/imported/Personaje1_Piernas.png-3a6c0198b84b4923cc8de732db4d6d98.ctex"]
 
 [params]
 
