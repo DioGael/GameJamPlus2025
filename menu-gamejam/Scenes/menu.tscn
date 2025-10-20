@@ -1,0 +1,123 @@
+[gd_scene load_steps=23 format=3 uid="uid://dy3awfy6r1212"]
+
+[ext_resource type="Script" uid="uid://cs8pu04scw37o" path="res://Script/menu.gd" id="1_wwsa2"]
+[ext_resource type="Texture2D" uid="uid://cqyywcrg0ruls" path="res://ConceptPersonaje1y2.png" id="2_jsrd8"]
+[ext_resource type="Texture2D" uid="uid://duvjvcwc0f1dn" path="res://Menu/PlayBtn.png" id="3_wbdvm"]
+[ext_resource type="Texture2D" uid="uid://cujbt2g6fwxtq" path="res://Menu/PlayClick.png" id="4_6swd7"]
+[ext_resource type="Texture2D" uid="uid://d3prdlgcut8ue" path="res://Menu/OptClick.png" id="4_q3rjx"]
+[ext_resource type="Texture2D" uid="uid://mqn7id6bgqy" path="res://Menu/ExitBtn.png" id="5_6swd7"]
+[ext_resource type="Texture2D" uid="uid://clg1bb2ytpsor" path="res://Menu/OptBtn.png" id="5_7qvly"]
+[ext_resource type="Texture2D" uid="uid://c2q4866ejtqug" path="res://Menu/image.png" id="5_rfqti"]
+[ext_resource type="Texture2D" uid="uid://bjdkp06ryjn7n" path="res://Menu/image (1).png" id="8_g8i7c"]
+[ext_resource type="Texture2D" uid="uid://bl3lc4ny5funa" path="res://Menu/ExitClick.png" id="8_rfqti"]
+[ext_resource type="Texture2D" uid="uid://cb3rw3yvwsivp" path="res://Menu/image (2).png" id="11_23t3j"]
+[ext_resource type="AudioStream" uid="uid://cbqp4ri0vjsgy" path="res://AUDIO MENU.wav" id="12_g8i7c"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7qvly"]
+texture = ExtResource("3_wbdvm")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8ph6h"]
+texture = ExtResource("4_6swd7")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kmwmt"]
+texture = ExtResource("5_rfqti")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rfqti"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g8i7c"]
+texture = ExtResource("5_7qvly")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5ti5v"]
+texture = ExtResource("4_q3rjx")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rc6uw"]
+texture = ExtResource("8_g8i7c")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_23t3j"]
+texture = ExtResource("5_6swd7")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1by5w"]
+texture = ExtResource("8_rfqti")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dldpb"]
+texture = ExtResource("11_23t3j")
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wwsa2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_jsrd8")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -213.5
+offset_top = -181.0
+offset_right = 213.5
+offset_bottom = 181.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_7qvly")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8ph6h")
+theme_override_styles/hover = SubResource("StyleBoxTexture_kmwmt")
+text = " 
+
+
+"
+icon = SubResource("ViewportTexture_rfqti")
+
+[node name="Options" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_g8i7c")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_5ti5v")
+theme_override_styles/hover = SubResource("StyleBoxTexture_rc6uw")
+text = " 
+
+
+"
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxTexture_23t3j")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_1by5w")
+theme_override_styles/hover = SubResource("StyleBoxTexture_dldpb")
+text = "
+
+
+"
+
+[node name="AudioMenu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_g8i7c")
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
